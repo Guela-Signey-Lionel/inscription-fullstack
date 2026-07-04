@@ -3,24 +3,24 @@ import { useState } from 'react';
 const testimonials = [
   {
     quote: 'EduRegister a transformé notre processus d\'admission. Les dossiers arrivent complets et le gain de temps est considérable pour notre équipe de scolarité. Nos candidats nous le disent : l\'interface est intuitive et rassurante.',
-    author: 'Dr. Sophie Mercier',
+    author: 'Dr. Rose Divine Zaninka',
     role: 'Directrice de la Scolarité',
     institution: 'Université Catholique d\'Afrique Centrale',
-    avatarUrl: 'https://readdy.ai/api/search-image?query=Professional%20African%20woman%20portrait%20with%20warm%20expression%2C%20minimalist%20cream%20studio%20background%2C%20soft%20natural%20lighting%2C%20clean%20professional%20headshot%2C%20modern%20aesthetic%2C%20confident%20and%20approachable%20look&width=200&height=200&seq=avatar-sophie-v2&orientation=squarish',
+    avatarUrl: '/images/rose.png',
   },
   {
     quote: 'Le wizard en 5 étapes est un vrai game-changer. Le taux d\'abandon a chuté de moitié depuis la migration. La validation automatique des documents nous fait gagner des heures chaque semaine.',
-    author: 'Prof. Marc Dubois',
+    author: 'Prof. Prince Begoto',
     role: 'Responsable Admissions',
     institution: 'Institut Supérieur de Technologie',
-    avatarUrl: 'https://readdy.ai/api/search-image?query=Professional%20African%20man%20portrait%20with%20warm%20expression%2C%20minimalist%20cream%20studio%20background%2C%20soft%20lighting%2C%20clean%20professional%20headshot%2C%20modern%20aesthetic%2C%20friendly%20and%20confident&width=200&height=200&seq=avatar-marc-v2&orientation=squarish',
+    avatarUrl: '/images/prince.png',
   },
   {
     quote: 'La validation automatique des documents, c\'est bluffant. Fini les allers-retours interminables pour des pièces manquantes ou mal formatées. Un vrai soulagement pour nos équipes administratives.',
-    author: 'Mme Amina Benali',
-    role: 'Cheffe de Projet Numérique',
+    author: 'Signey Lionel Guela',
+    role: 'Chef de Projet Numérique',
     institution: 'Complexe Scolaire International',
-    avatarUrl: 'https://readdy.ai/api/search-image?query=Professional%20African%20woman%20portrait%20with%20confident%20smile%2C%20minimalist%20cream%20studio%20background%2C%20warm%20lighting%2C%20clean%20professional%20headshot%2C%20modern%20editorial%20style%2C%20elegant&width=200&height=200&seq=avatar-amina-v2&orientation=squarish',
+    avatarUrl: '/images/signey.jpg',
   },
 ];
 

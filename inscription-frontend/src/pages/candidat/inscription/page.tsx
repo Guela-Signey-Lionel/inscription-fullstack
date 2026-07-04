@@ -98,7 +98,7 @@ export default function InscriptionWizard() {
         try {
           const { inscriptionsApi } = await import('@/api/inscriptions');
           const created = await inscriptionsApi.creer({
-            typeInscription: (updated.typeInscription as string) || 'PREMIERE_INSCRIPTION',
+            typeInscription: (updated.typeInscription as string) || 'PREMIERE',
             anneeAcademique: (updated.anneeAcademique as string) || '2026-2027',
           });
           setDossierId(created.id);

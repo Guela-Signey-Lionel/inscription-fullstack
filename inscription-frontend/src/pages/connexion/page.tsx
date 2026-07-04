@@ -201,15 +201,13 @@ export default function LoginPage() {
             </Link>
           </p>
 
-          <p className="text-center text-sm text-foreground-600 mt-3 font-body">
-            Vous êtes administrateur ?{' '}
-            <Link
-              to="/connexion-admin"
-              className="text-foreground-500 hover:text-foreground-700 font-medium"
-            >
-              Espace administration
-            </Link>
-          </p>
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center gap-2 mt-6 w-full px-5 py-3 rounded-xl border border-background-300 text-foreground-600 text-sm font-medium hover:bg-background-100 hover:border-background-400 transition-all font-label"
+          >
+            <i className="ri-arrow-left-line text-sm w-4 h-4 flex items-center justify-center"></i>
+            Retour à l&apos;accueil
+          </Link>
         </div>
       </main>
     </div>

@@ -58,6 +58,7 @@ export default function CandidatDocuments() {
 
   const [fichiers, setFichiers] = useState<FichierSoumis[]>(fichiersInitiaux);
   const [uploadingFor, setUploadingFor] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [previewDoc, setPreviewDoc] = useState<FichierSoumis | null>(null);
   const [dragOver, setDragOver] = useState<string | null>(null);
 
@@ -88,24 +89,43 @@ export default function CandidatDocuments() {
     const file = e.target.files?.[0];
     if (!file || !uploadingFor) return;
 
-    const now = new Date();
-    const dateStr = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} à ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    // Simulate upload progress
+    setUploadProgress(0);
+    const interval = setInterval(() => {
+      setUploadProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + Math.floor(Math.random() * 15) + 5;
+      });
+    }, 200);
 
-    const taille = file.size < 1024 * 1024
-      ? `${Math.round(file.size / 1024)} Ko`
-      : `${(file.size / (1024 * 1024)).toFixed(1)} Mo`;
+    // Simulate upload completion after ~2 seconds
+    setTimeout(() => {
+      clearInterval(interval);
+      setUploadProgress(100);
 
-    setFichiers((prev) =>
-      prev.map((f) =>
-        f.id === uploadingFor
-          ? { ...f, nom: file.name, taille, dateUpload: dateStr, statut: 'en_attente' as const, commentaire: undefined }
-          : f
-      )
-    );
+      const now = new Date();
+      const dateStr = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} à ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
 
-    addToast(`Fichier "${file.name}" téléversé avec succès`, 'success');
-    setUploadingFor(null);
-    if (fileInputRef.current) fileInputRef.current.value = '';
+      const taille = file.size < 1024 * 1024
+        ? `${Math.round(file.size / 1024)} Ko`
+        : `${(file.size / (1024 * 1024)).toFixed(1)} Mo`;
+
+      setFichiers((prev) =>
+        prev.map((f) =>
+          f.id === uploadingFor
+            ? { ...f, nom: file.name, taille, dateUpload: dateStr, statut: 'en_attente' as const, commentaire: undefined }
+            : f
+        )
+      );
+
+      addToast(`Fichier "${file.name}" téléversé avec succès`, 'success');
+      setUploadingFor(null);
+      setUploadProgress(0);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }, 2000);
   };
 
   const handleDragOver = (e: React.DragEvent, docId: string) => {
@@ -287,6 +307,22 @@ export default function CandidatDocuments() {
                 )}
               </div>
 
+              {/* Upload progress bar */}
+              {uploadingFor === fichier.id && uploadProgress > 0 && uploadProgress < 100 && (
+                <div className="w-full sm:w-48 flex-shrink-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] font-semibold text-primary-600 font-label">{uploadProgress}%</span>
+                    <div className="flex-1 h-2 rounded-full bg-background-200 overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-primary-500 transition-all duration-200"
+                        style={{ width: `${uploadProgress}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-foreground-400 font-body text-right">Upload en cours...</p>
+                </div>
+              )}
+
               {/* Actions */}
               <div className="flex items-center gap-2 flex-shrink-0">
                 {fichier.nom && (
@@ -298,7 +334,8 @@ export default function CandidatDocuments() {
                     <i className="ri-eye-line w-4 h-4 flex items-center justify-center"></i>
                   </button>
                 )}
-                {fichier.statut !== 'valide' && (
+                {fichier.statut !== 'valide' &&
+                  !(uploadProgress > 0 && uploadProgress < 100 && uploadingFor === fichier.id) && (
                   <button
                     onClick={() => handleFileSelect(fichier.id)}
                     disabled={uploadingFor === fichier.id}

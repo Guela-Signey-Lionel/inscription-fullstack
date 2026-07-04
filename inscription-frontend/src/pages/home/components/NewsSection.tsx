@@ -7,7 +7,7 @@ const articles = [
     resume: 'L\'Institut PKFokam annonce les dates officielles de la rentrée pour l\'année académique 2026-2027. Les inscriptions sont déjà ouvertes.',
     categorie: 'Rentrée',
     date: '05 Juin 2026',
-    image: 'https://readdy.ai/api/search-image?query=modern%20university%20campus%20with%20students%20walking%20through%20tree%20lined%20pathways%20in%20warm%20morning%20light%2C%20sage%20green%20and%20cream%20tones%2C%20soft%20natural%20lighting%2C%20editorial%20style%2C%20academic%20atmosphere%2C%20peaceful%20and%20inspiring%20scene%2C%20no%20people%20faces%20visible%2C%20architecture%20in%20background&width=800&height=500&seq=blog-rentree-2026&orientation=landscape',
+    image: '/images/events.jpeg',
     auteur: 'Administration',
   },
   {
@@ -16,7 +16,7 @@ const articles = [
     resume: 'Un tout nouveau programme de Master en IA ouvre ses portes pour la rentrée 2026. Découvrez le programme, les débouchés et les conditions d\'admission.',
     categorie: 'Formation',
     date: '28 Mai 2026',
-    image: 'https://readdy.ai/api/search-image?query=futuristic%20modern%20technology%20lab%20with%20students%20working%20on%20computers%2C%20artificial%20intelligence%20concept%2C%20warm%20ambient%20lighting%2C%20sage%20green%20and%20cream%20accents%2C%20editorial%20photography%2C%20clean%20minimalist%20aesthetic%2C%20collaborative%20learning%20environment&width=800&height=500&seq=blog-master-ia&orientation=landscape',
+    image: '/images/events.jpeg',
     auteur: 'Direction Pédagogique',
   },
   {
@@ -25,7 +25,7 @@ const articles = [
     resume: 'L\'Institut PKFokam vous invite à sa journée portes ouvertes le samedi 20 juin. Venez découvrir le campus, rencontrer les professeurs et poser toutes vos questions.',
     categorie: 'Événement',
     date: '15 Mai 2026',
-    image: 'https://readdy.ai/api/search-image?query=university%20open%20day%20event%20with%20prospective%20students%20and%20parents%20touring%20a%20modern%20campus%20building%2C%20friendly%20atmosphere%2C%20warm%20natural%20light%2C%20sage%20green%20and%20cream%20color%20palette%2C%20architectural%20details%2C%20editorial%20photography%20style%2C%20welcoming%20environment&width=800&height=500&seq=blog-portes-ouvertes&orientation=landscape',
+    image: '/images/events.jpeg',
     auteur: 'Administration',
   },
   {
@@ -34,7 +34,7 @@ const articles = [
     resume: 'L\'Institut met en place un nouveau programme de bourses au mérite pour les meilleurs candidats. Découvrez les critères d\'éligibilité et le processus de candidature.',
     categorie: 'Bourses',
     date: '02 Mai 2026',
-    image: 'https://readdy.ai/api/search-image?query=graduation%20caps%20and%20diplomas%20on%20a%20wooden%20table%20with%20warm%20sunlight%20streaming%20through%20window%2C%20academic%20achievement%20concept%2C%20sage%20green%20and%20cream%20tones%2C%20soft%20focus%20background%20with%20bookshelves%2C%20editorial%20still%20life%20photography%2C%20celebratory%20atmosphere&width=800&height=500&seq=blog-bourses&orientation=landscape',
+    image: '/images/events.jpeg',
     auteur: 'Service Scolarité',
   },
   {
@@ -43,7 +43,7 @@ const articles = [
     resume: 'Un nouvel accord de coopération signé avec l\'Université de Strasbourg permet aux étudiants de PKFokam de bénéficier d\'échanges académiques en Europe.',
     categorie: 'Partenariat',
     date: '18 Avril 2026',
-    image: 'https://readdy.ai/api/search-image?query=two%20university%20administrators%20shaking%20hands%20in%20a%20modern%20office%20with%20international%20flags%20in%20background%2C%20professional%20atmosphere%2C%20warm%20natural%20lighting%2C%20sage%20green%20and%20cream%20interior%20palette%2C%20editorial%20corporate%20photography%2C%20diplomatic%20and%20friendly%20mood&width=800&height=500&seq=blog-partenariat&orientation=landscape',
+    image: '/images/events.jpeg',
     auteur: 'Relations Internationales',
   },
   {
@@ -52,7 +52,7 @@ const articles = [
     resume: 'Le calendrier des examens de la session de septembre est désormais disponible. Consultez les dates par filière et préparez-vous en conséquence.',
     categorie: 'Examens',
     date: '10 Avril 2026',
-    image: 'https://readdy.ai/api/search-image?query=student%20studying%20at%20library%20desk%20with%20open%20books%20and%20laptop%2C%20focused%20atmosphere%2C%20warm%20desk%20lamp%20lighting%2C%20sage%20green%20and%20cream%20tones%2C%20quiet%20academic%20setting%2C%20editorial%20photography%20style%2C%20calm%20and%20concentrated%20mood&width=800&height=500&seq=blog-examens&orientation=landscape',
+    image: '/images/events.jpeg',
     auteur: 'Direction des Études',
   },
 ];

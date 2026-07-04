@@ -4,6 +4,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { authApi } from '@/api/auth';
 
+const adminImage = '/images/Sig.jpg';
+
 const adminNavItems = [
   { label: 'Tableau de bord', href: '/admin/tableau-de-bord', icon: 'ri-dashboard-line' },
   { label: 'Dossiers', href: '/admin/dossiers', icon: 'ri-folder-line' },

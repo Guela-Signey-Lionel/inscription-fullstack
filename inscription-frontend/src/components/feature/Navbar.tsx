@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -8,6 +9,15 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
+  const { i18n } = useTranslation();
+
+  const [currentLang, setCurrentLang] = useState<'fr' | 'en'>(i18n.language?.startsWith('fr') ? 'fr' : 'en');
+
+  const toggleLanguage = () => {
+    const newLang = currentLang === 'fr' ? 'en' : 'fr';
+    i18n.changeLanguage(newLang);
+    setCurrentLang(newLang);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -157,6 +167,18 @@ export default function Navbar() {
                   Administrateur
                 </Link>
               </div>
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap font-label border border-background-200/70 bg-background-50 text-foreground-600 hover:bg-background-100 hover:border-background-300"
+                title={currentLang === 'fr' ? 'Switch to English' : 'Passer en français'}
+              >
+                <i className="ri-global-line text-xs w-3.5 h-3.5 flex items-center justify-center"></i>
+                <span className="flex items-center gap-1">
+                  <span className={currentLang === 'fr' ? 'text-foreground-950 font-bold' : 'text-foreground-400'}>FR</span>
+                  <span className="text-foreground-300">|</span>
+                  <span className={currentLang === 'en' ? 'text-foreground-950 font-bold' : 'text-foreground-400'}>EN</span>
+                </span>
+              </button>
             </div>
           )}
 
@@ -230,6 +252,23 @@ export default function Navbar() {
               </Link>
             </>
           )}
+
+          <div className="h-px bg-background-200 my-2"></div>
+
+          <button
+            onClick={() => {
+              toggleLanguage();
+              setMobileOpen(false);
+            }}
+            className="flex items-center justify-center gap-2 text-sm font-medium py-2.5 px-3 rounded-lg text-foreground-600 hover:bg-background-100 transition-colors font-label cursor-pointer"
+          >
+            <i className="ri-global-line w-4 h-4 flex items-center justify-center"></i>
+            <span className="flex items-center gap-1">
+              <span className={currentLang === 'fr' ? 'text-foreground-950 font-bold' : 'text-foreground-400'}>FR</span>
+              <span className="text-foreground-300">|</span>
+              <span className={currentLang === 'en' ? 'text-foreground-950 font-bold' : 'text-foreground-400'}>EN</span>
+            </span>
+          </button>
         </div>
       )}
     </nav>
