@@ -1,0 +1,52 @@
+# Environnement
+.env
+.env.local
+.env.*
+
+# Backend - Build & IDE
+inscription-backend/target/
+inscription-backend/.idea/
+inscription-backend/*.iml
+inscription-backend/.classpath
+inscription-backend/.project
+inscription-backend/.settings/
+
+# Frontend - Dépendances & Build
+inscription-frontend/node_modules/
+inscription-frontend/dist/
+inscription-frontend/out/
+inscription-frontend/auto-imports.d.ts
+inscription-frontend/vite-env.d.ts
+
+# IDE (racine)
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Java / Maven
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Système
+.metadata
+bin/
+build/
