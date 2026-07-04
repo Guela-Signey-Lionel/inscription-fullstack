@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: inscription-postgres
+    environment:
+      POSTGRES_DB: inscription_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - inscription_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U postgres -d inscription_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build: .
+    container_name: inscription-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/inscription_db
+      DB_USERNAME: inscription_user
+      DB_PASSWORD: inscription_pass
+      JWT_SECRET: ${JWT_SECRET:-507A723F4428472D4B6150645367566B5970337336763979244226452948404D}
+      SERVER_PORT: 8081
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+      MAIL_HOST: ${MAIL_HOST:-smtp.gmail.com}
+      MAIL_PORT: ${MAIL_PORT:-587}
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - "8082:8081"
+    restart: unless-stopped
+
+volumes:
+  inscription_data:
