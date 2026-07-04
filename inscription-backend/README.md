@@ -61,13 +61,12 @@ npm run dev
 
 ---
 
-## Comptes de test
+## Compte préconfiguré coté Admin
 
-| Rôle            | Email                 | Mot de passe |
-|-----------------|-----------------------|--------------|
-| Super Admin     | admin@pkfokam.edu     | Admin@1234   |
-| Agent Scolarité | scolarite@pkfokam.edu | Agent@1234   |
-| Candidat        | candidat@test.cm      | Test@1234    |
+| Rôle      | Email                 | Mot de passe |
+|-----------|-----------------------|--------------|
+| Admin     | admin@pkfokam.edu     | Admin@1234   |
+
 
 > Les comptes sont créés via le script SQL de seed ou via l'API `/auth/register`.
 
