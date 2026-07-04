@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navigate, useNavigate } from 'react-router-dom';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { authApi } from '@/api/auth';
 
-const adminImage = '/images/Sig.jpg';
+const DEFAULT_IMAGE = '/images/signey.jpg';
+const PRESET_IMAGES = [
+  { src: '/images/signey.jpg', label: 'Signey' },
+  { src: '/images/rose.png', label: 'Rose' },
+  { src: '/images/prince.png', label: 'Prince' },
+];
 
 const adminNavItems = [
   { label: 'Tableau de bord', href: '/admin/tableau-de-bord', icon: 'ri-dashboard-line' },
@@ -30,7 +35,11 @@ export default function AdminProfil() {
     fonction:     'Administrateur',
     departement:  'Administration',
     bio:          '',
+    avatar:       DEFAULT_IMAGE,
   });
+
+  const [showImagePicker, setShowImagePicker] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (isLoading) {
     return (
@@ -68,8 +77,13 @@ export default function AdminProfil() {
         <div className="bg-white rounded-2xl border border-background-200/70 overflow-hidden mb-6">
           <div className="bg-gradient-to-r from-primary-600 to-primary-500 h-32 relative">
             <div className="absolute -bottom-12 left-6">
-              <div className="w-24 h-24 rounded-2xl border-4 border-white overflow-hidden bg-primary-100 shadow-lg">
-                <img src={adminImage} alt="Profil administrateur" className="w-full h-full object-cover" />
+              <div className="w-24 h-24 rounded-2xl border-4 border-white overflow-hidden bg-primary-100 shadow-lg group relative">
+                <img src={profil.avatar} alt="Profil administrateur" className="w-full h-full object-cover" />
+                {editing && (
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer" onClick={() => setShowImagePicker(!showImagePicker)}>
+                    <i className="ri-camera-line text-white text-xl w-6 h-6 flex items-center justify-center"></i>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -87,6 +101,53 @@ export default function AdminProfil() {
                 {editing ? 'Annuler' : 'Modifier'}
               </button>
             </div>
+
+            {/* Image picker popup */}
+            {showImagePicker && editing && (
+              <div className="mb-4 p-4 rounded-xl bg-background-50 border border-background-200">
+                <p className="text-xs font-semibold text-foreground-600 mb-3 font-label">Choisir une photo</p>
+                <div className="flex items-center gap-3 mb-3">
+                  {PRESET_IMAGES.map((img) => (
+                    <button
+                      key={img.src}
+                      onClick={() => { setProfil({ ...profil, avatar: img.src }); setShowImagePicker(false); }}
+                      className={`w-14 h-14 rounded-xl border-2 overflow-hidden transition-all hover:border-primary-400 cursor-pointer ${
+                        profil.avatar === img.src ? 'border-primary-500 ring-2 ring-primary-200' : 'border-background-300'
+                      }`}
+                    >
+                      <img src={img.src} alt={img.label} className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+                <div className="h-px bg-background-200 my-2"></div>
+                <button
+                  onClick={() => { fileInputRef.current?.click(); }}
+                  className="flex items-center gap-2 text-xs font-medium text-primary-600 hover:text-primary-700 transition-colors font-label cursor-pointer"
+                >
+                  <i className="ri-upload-cloud-2-line w-4 h-4 flex items-center justify-center"></i>
+                  Télécharger une photo
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = (ev) => {
+                        if (ev.target?.result) {
+                          setProfil({ ...profil, avatar: ev.target.result as string });
+                          setShowImagePicker(false);
+                        }
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              </div>
+            )}
 
             {saved && (
               <div className="mb-4 p-3 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-2">

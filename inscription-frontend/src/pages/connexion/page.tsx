@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/feature/Navbar';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -55,10 +57,10 @@ export default function LoginPage() {
               </span>
             </Link>
             <h1 className="text-2xl md:text-3xl font-heading font-bold text-foreground-950">
-              Bienvenue
+              {t('login.bienvenue')}
             </h1>
             <p className="text-foreground-600 text-sm mt-2 font-body">
-              Connectez-vous à votre espace candidat ou administration
+              {t('login.sousTitre')}
             </p>
           </div>
 
@@ -72,7 +74,7 @@ export default function LoginPage() {
               >
                 <i className="ri-google-fill text-lg w-5 h-5 flex items-center justify-center"></i>
                 <span className="text-sm font-medium text-foreground-800 font-label">
-                  Continuer avec Google
+                  {t('login.google')}
                 </span>
               </button>
               <button
@@ -83,7 +85,7 @@ export default function LoginPage() {
               >
                 <i className="ri-microsoft-fill text-lg w-5 h-5 flex items-center justify-center"></i>
                 <span className="text-sm font-medium text-foreground-800 font-label">
-                  Continuer avec Microsoft
+                  {t('login.microsoft')}
                 </span>
               </button>
             </div>
@@ -91,7 +93,7 @@ export default function LoginPage() {
             <div className="relative flex items-center gap-3 mb-6">
               <div className="flex-1 h-px bg-background-200"></div>
               <span className="text-xs text-foreground-400 font-medium font-label">
-                ou par email
+                {t('login.ouParEmail')}
               </span>
               <div className="flex-1 h-px bg-background-200"></div>
             </div>
@@ -109,7 +111,7 @@ export default function LoginPage() {
                   htmlFor="email"
                   className="block text-xs font-semibold text-foreground-700 mb-1.5 font-label"
                 >
-                  Adresse email
+                  {t('login.email')}
                 </label>
                 <div className="relative">
                   <i className="ri-mail-line absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground-400 text-sm w-4 h-4 flex items-center justify-center"></i>
@@ -130,7 +132,7 @@ export default function LoginPage() {
                   htmlFor="password"
                   className="block text-xs font-semibold text-foreground-700 mb-1.5 font-label"
                 >
-                  Mot de passe
+                  {t('login.motDePasse')}
                 </label>
                 <div className="relative">
                   <i className="ri-lock-line absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground-400 text-sm w-4 h-4 flex items-center justify-center"></i>
@@ -161,14 +163,14 @@ export default function LoginPage() {
                     className="w-4 h-4 rounded border-background-300 text-primary-500 focus:ring-primary-400 cursor-pointer"
                   />
                   <span className="text-xs text-foreground-600 font-body">
-                    Se souvenir de moi
+                    {t('login.seSouvenir')}
                   </span>
                 </label>
                 <Link
                   to="/mot-de-passe-oublie"
                   className="text-xs text-primary-600 hover:text-primary-700 font-medium font-body"
                 >
-                  Mot de passe oublié ?
+                  {t('login.motDePasseOublie')}
                 </Link>
               </div>
 
@@ -180,10 +182,10 @@ export default function LoginPage() {
                 {isLoading ? (
                   <>
                     <i className="ri-loader-4-line animate-spin w-4 h-4 flex items-center justify-center"></i>
-                    Connexion en cours...
+                    {t('login.connexionEnCours')}
                   </>
                 ) : (
-                  'Se connecter'
+                  t('login.seConnecter')
                 )}
               </button>
             </form>
@@ -192,12 +194,12 @@ export default function LoginPage() {
           </div>
 
           <p className="text-center text-sm text-foreground-600 mt-6 font-body">
-            Pas encore de compte ?{' '}
+            {t('login.pasDeCompte')}{' '}
             <Link
               to="/inscription-compte"
               className="text-primary-600 hover:text-primary-700 font-semibold"
             >
-              Créer un compte
+              {t('login.creerCompte')}
             </Link>
           </p>
 
@@ -206,7 +208,7 @@ export default function LoginPage() {
             className="inline-flex items-center justify-center gap-2 mt-6 w-full px-5 py-3 rounded-xl border border-background-300 text-foreground-600 text-sm font-medium hover:bg-background-100 hover:border-background-400 transition-all font-label"
           >
             <i className="ri-arrow-left-line text-sm w-4 h-4 flex items-center justify-center"></i>
-            Retour à l&apos;accueil
+            {t('login.retourAccueil')}
           </Link>
         </div>
       </main>

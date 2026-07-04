@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Navbar from '@/components/feature/Navbar';
 import { authApi } from '@/api/auth';
 
 export default function RegisterPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState<'form' | 'otp'>('form');
@@ -88,10 +90,10 @@ export default function RegisterPage() {
               <i className="ri-check-line text-emerald-600 text-2xl w-8 h-8 flex items-center justify-center"></i>
             </div>
             <h2 className="text-2xl font-heading font-bold text-foreground-950 mb-3">
-              Email vérifié avec succès !
+              {t('otp.succes')}
             </h2>
             <p className="text-foreground-600 text-sm font-body">
-              Votre compte est activé. Redirection vers votre espace...
+              {t('otp.redirection')}
             </p>
           </div>
         </main>
@@ -116,9 +118,9 @@ export default function RegisterPage() {
               <div className="w-14 h-14 rounded-2xl bg-primary-100 flex items-center justify-center mx-auto mb-5">
                 <i className="ri-mail-check-line text-primary-600 text-2xl w-8 h-8 flex items-center justify-center"></i>
               </div>
-              <h1 className="text-2xl font-heading font-bold text-foreground-950">Vérifiez votre email</h1>
+              <h1 className="text-2xl font-heading font-bold text-foreground-950">{t('otp.verifiezEmail')}</h1>
               <p className="text-foreground-600 text-sm mt-2 font-body">
-                Un code de vérification a été envoyé à<br />
+                {t('otp.codeEnvoye')}<br />
                 <strong className="text-foreground-900">{formData.email}</strong>
               </p>
             </div>
@@ -134,7 +136,7 @@ export default function RegisterPage() {
               <form onSubmit={handleVerifyOtp} className="flex flex-col gap-4">
                 <div>
                   <label htmlFor="otp" className="block text-xs font-semibold text-foreground-700 mb-1.5 font-label">
-                    Code de vérification (6 chiffres)
+                    {t('otp.code')}
                   </label>
                   <input
                     id="otp"
@@ -155,19 +157,19 @@ export default function RegisterPage() {
                   className="w-full px-5 py-3 rounded-xl bg-primary-500 text-white text-sm font-semibold hover:bg-primary-600 focus:ring-4 focus:ring-primary-200 transition-all cursor-pointer font-label mt-1 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isSubmitting
-                    ? <><i className="ri-loader-4-line animate-spin w-4 h-4 flex items-center justify-center"></i>Vérification...</>
-                    : 'Valider mon compte'}
+                    ? <>                <i className="ri-loader-4-line animate-spin w-4 h-4 flex items-center justify-center"></i>{t('otp.verification')}</>
+                    : t('otp.valider')}
                 </button>
               </form>
 
               <div className="mt-5 text-center">
-                <p className="text-xs text-foreground-500 font-body mb-2">Vous n&apos;avez pas reçu le code ?</p>
+                <p className="text-xs text-foreground-500 font-body mb-2">{t('otp.pasRecu')}</p>
                 <button
                   onClick={handleResendOtp}
                   disabled={resending}
                   className="text-sm text-primary-600 hover:text-primary-700 font-medium font-label disabled:opacity-50 cursor-pointer"
                 >
-                  {resending ? 'Envoi en cours...' : 'Renvoyer le code'}
+                  {resending ? 'Envoi en cours...' : t('otp.renvoyer')}
                 </button>
               </div>
             </div>
@@ -177,7 +179,7 @@ export default function RegisterPage() {
                 onClick={() => setStep('form')}
                 className="text-primary-600 hover:text-primary-700 font-semibold cursor-pointer"
               >
-                ← Modifier l&apos;email
+                {t('otp.modifierEmail')}
               </button>
             </p>
           </div>
@@ -202,10 +204,10 @@ export default function RegisterPage() {
               </span>
             </Link>
             <h1 className="text-2xl md:text-3xl font-heading font-bold text-foreground-950">
-              Créer un compte
+              {t('register.creerCompte')}
             </h1>
             <p className="text-foreground-600 text-sm mt-2 font-body">
-              Rejoignez EduRegister pour démarrer votre inscription
+              {t('register.sousTitre')}
             </p>
           </div>
 
@@ -224,7 +226,7 @@ export default function RegisterPage() {
                     htmlFor="prenom"
                     className="block text-xs font-semibold text-foreground-700 mb-1.5 font-label"
                   >
-                    Prénom
+                    {t('register.prenom')}
                   </label>
                   <input
                     id="prenom"
@@ -242,7 +244,7 @@ export default function RegisterPage() {
                     htmlFor="nom"
                     className="block text-xs font-semibold text-foreground-700 mb-1.5 font-label"
                   >
-                    Nom
+                    {t('register.nom')}
                   </label>
                   <input
                     id="nom"
@@ -261,9 +263,8 @@ export default function RegisterPage() {
                 <label
                   htmlFor="reg-email"
                   className="block text-xs font-semibold text-foreground-700 mb-1.5 font-label"
-                >
-                  Adresse email
-                </label>
+                >                    {t('register.email')}
+                  </label>
                 <div className="relative">
                   <i className="ri-mail-line absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground-400 text-sm w-4 h-4 flex items-center justify-center"></i>
                   <input
@@ -283,9 +284,8 @@ export default function RegisterPage() {
                 <label
                   htmlFor="reg-password"
                   className="block text-xs font-semibold text-foreground-700 mb-1.5 font-label"
-                >
-                  Mot de passe
-                </label>
+                >                    {t('register.motDePasse')}
+                  </label>
                 <div className="relative">
                   <i className="ri-lock-line absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground-400 text-sm w-4 h-4 flex items-center justify-center"></i>
                   <input
@@ -314,9 +314,8 @@ export default function RegisterPage() {
                 <label
                   htmlFor="reg-confirm"
                   className="block text-xs font-semibold text-foreground-700 mb-1.5 font-label"
-                >
-                  Confirmer le mot de passe
-                </label>
+                >                    {t('register.confirmer')}
+                  </label>
                 <div className="relative">
                   <i className="ri-lock-line absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground-400 text-sm w-4 h-4 flex items-center justify-center"></i>
                   <input
@@ -358,22 +357,22 @@ export default function RegisterPage() {
                 {isSubmitting ? (
                   <>
                     <i className="ri-loader-4-line animate-spin w-4 h-4 flex items-center justify-center"></i>
-                    Création en cours...
+                    {t('register.creationEnCours')}
                   </>
                 ) : (
-                  'Créer mon compte'
+                  t('register.creer')
                 )}
               </button>
             </form>
           </div>
 
           <p className="text-center text-sm text-foreground-600 mt-6 font-body">
-            Déjà un compte ?{' '}
+            {t('register.dejaCompte')}{' '}
             <Link
               to="/connexion"
               className="text-primary-600 hover:text-primary-700 font-semibold"
             >
-              Se connecter
+              {t('register.seConnecter')}
             </Link>
           </p>
         </div>
