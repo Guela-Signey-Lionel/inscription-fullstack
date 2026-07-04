@@ -5,7 +5,6 @@ import Footer from '@/components/feature/Footer';
 import HeroSection from './components/HeroSection';
 import StatsSection from './components/StatsSection';
 import FeaturesSection from './components/FeaturesSection';
-import ProcessSection from './components/ProcessSection';
 import TuitionFeesSection from './components/TuitionFeesSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import NewsSection from './components/NewsSection';
@@ -70,9 +69,6 @@ export default function Home() {
       </AnimateOnScroll>
       <AnimateOnScroll>
         <ServicesSection />
-      </AnimateOnScroll>
-      <AnimateOnScroll>
-        <ProcessSection />
       </AnimateOnScroll>
       <AnimateOnScroll>
         <TuitionFeesSection />

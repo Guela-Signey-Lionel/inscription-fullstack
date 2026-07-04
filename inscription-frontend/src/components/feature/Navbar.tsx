@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTranslation } from 'react-i18next';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -9,14 +8,10 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
-  const { t, i18n } = useTranslation();
-
-  const [currentLang, setCurrentLang] = useState<'fr' | 'en'>(i18n.language?.startsWith('fr') ? 'fr' : 'en');
+  const [currentLang, setCurrentLang] = useState<'fr' | 'en'>('fr');
 
   const toggleLanguage = () => {
-    const newLang = currentLang === 'fr' ? 'en' : 'fr';
-    i18n.changeLanguage(newLang);
-    setCurrentLang(newLang);
+    setCurrentLang((prev) => (prev === 'fr' ? 'en' : 'fr'));
   };
 
   useEffect(() => {
@@ -31,14 +26,13 @@ export default function Navbar() {
   const transparentBg = isHome && !scrolled && !mobileOpen;
 
   const navLinks = [
-    { label: t('nav.accueil'), href: '/' },
-    { label: t('nav.fonctionnalites'), href: '/#fonctionnalites' },
-    { label: t('nav.commentCaMarche'), href: '/#processus' },
-    { label: t('nav.fraisScolarite'), href: '/#frais-scolarite' },
-    { label: t('nav.temoignages'), href: '/#temoignages' },
-    { label: t('nav.actualites'), href: '/#actualites' },
-    { label: t('nav.services'), href: '/#services' },
-    { label: t('nav.contact'), href: '/#contact' },
+    { label: 'Accueil', href: '/' },
+    { label: 'Fonctionnalités', href: '/#fonctionnalites' },
+    { label: 'Frais de scolarité', href: '/#frais-scolarite' },
+    { label: 'Témoignages', href: '/#temoignages' },
+    { label: 'Actualités', href: '/#actualites' },
+    { label: 'Services', href: '/#services' },
+    { label: 'Contact', href: '/#contact' },
   ];
 
   const handleNavClick = useCallback(
@@ -109,7 +103,9 @@ export default function Navbar() {
           >
             EduRegister
           </span>
-        </Link>          <div className="hidden md:flex items-center gap-8 ml-auto mr-8">
+        </Link>
+
+        <div className="hidden md:flex items-center gap-6 ml-16">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -131,7 +127,7 @@ export default function Navbar() {
                 to={getDashboardLink()}
                 className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap font-label bg-primary-50 text-primary-700 hover:bg-primary-100"
               >                  <i className="ri-dashboard-line mr-1.5 text-sm w-4 h-4 inline-flex items-center justify-center"></i>
-                {t('nav.tableauDeBord')}
+Tableau de bord
               </Link>
               <div className="flex items-center gap-2 pl-3 border-l border-background-300">
                 <span className="text-xs font-medium font-body text-foreground-600">
@@ -140,7 +136,7 @@ export default function Navbar() {
                 <button
                   onClick={handleLogout}
                   className="w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer text-foreground-500 hover:text-foreground-800 hover:bg-background-100"
-                  title={t('nav.deconnexion')}
+                  title="Déconnexion"
                 >
                   <i className="ri-logout-box-r-line text-sm w-4 h-4 flex items-center justify-center"></i>
                 </button>
@@ -154,20 +150,20 @@ export default function Navbar() {
                   className="px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap font-label bg-primary-500 text-white shadow-sm"
                 >
                   <i className="ri-user-line text-xs w-3.5 h-3.5 inline-flex items-center justify-center mr-1"></i>
-                  {t('nav.etudiant')}
+Étudiant
                 </Link>
                 <Link
                   to="/connexion-admin"
                   className="px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap font-label text-foreground-500 hover:text-foreground-700"
                 >
                   <i className="ri-shield-check-line text-xs w-3.5 h-3.5 inline-flex items-center justify-center mr-1"></i>
-                  {t('nav.administrateur')}
+Administrateur
                 </Link>
               </div>
               <button
                 onClick={toggleLanguage}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap font-label border border-background-200/70 bg-background-50 text-foreground-600 hover:bg-background-100 hover:border-background-300"
-                title={currentLang === 'fr' ? t('lang.switchToEn') : t('lang.switchToFr')}
+                title={currentLang === 'fr' ? 'Switch to English' : 'Passer en français'}
               >
                 <i className="ri-global-line text-xs w-3.5 h-3.5 flex items-center justify-center"></i>
                 <span className="flex items-center gap-1">
@@ -216,7 +212,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 text-sm font-medium py-2.5 px-3 rounded-lg bg-primary-50 text-primary-700 hover:bg-primary-100 transition-colors font-label"
               >
                 <i className="ri-dashboard-line w-4 h-4 flex items-center justify-center"></i>
-                {t('nav.tableauDeBord')}
+Tableau de bord
               </Link>
               <button
                 onClick={() => {
@@ -226,7 +222,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 text-sm font-medium py-2.5 px-3 rounded-lg text-foreground-600 hover:bg-background-100 transition-colors font-label cursor-pointer"
               >
                 <i className="ri-logout-box-r-line w-4 h-4 flex items-center justify-center"></i>
-                {t('nav.deconnexion')}
+Déconnexion
               </button>
             </>
           ) : (
@@ -237,7 +233,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 text-sm font-medium py-2.5 px-3 rounded-lg bg-primary-500 text-white hover:bg-primary-600 transition-colors font-label"
               >
                 <i className="ri-user-line w-4 h-4 flex items-center justify-center"></i>
-                {t('nav.connexionEtudiant')}
+Connexion étudiant
               </Link>
               <Link
                 to="/connexion-admin"
@@ -245,7 +241,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 text-sm font-medium py-2.5 px-3 rounded-lg bg-background-100 text-foreground-700 hover:bg-background-200 transition-colors font-label"
               >
                 <i className="ri-shield-check-line w-4 h-4 flex items-center justify-center"></i>
-                {t('nav.connexionAdmin')}
+Connexion admin
               </Link>
             </>
           )}
